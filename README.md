@@ -90,7 +90,8 @@ class DefaultController
 - 🖥️ Ajout d’une CLI pour automatiser les tâches
 - 🪵 Logger / Fichiers de log
 - ⚠️ Gestion des erreurs personnalisée
-
+- 🤖 Insertion d'une aide IA pour le développeur
+ 
 ---
 
 ## 📝 Notes
