@@ -1,0 +1,75 @@
+# Ignorer les fichiers d'environnement sensibles
+.env
+
+# Ignorer les fichiers de configuration de composer (généralement on versionne composer.json, mais ici tu veux l'ignorer)
+composer.json
+
+# Ignorer les dossiers /vendor/ si utilisés (pas mentionnés, mais souvent présents)
+vendor/
+
+# Ignorer les fichiers temporaires et logs
+*.log
+logs/
+tmp/
+cache/
+var/cache/
+var/log/
+
+# Ignorer les fichiers système
+.DS_Store
+Thumbs.db
+
+# Ignorer dossiers et fichiers IDE
+.vscode/
+.idea/
+
+# Ignorer fichiers temporaires
+*.tmp
+*.bak
+*.swp
+
+# Ignorer build / dist
+/build/
+/dist/
+
+# Ignorer node_modules si utilisé
+node_modules/
+
+# Ignorer les fichiers lock (si utilisés)
+package-lock.json
+yarn.lock
+composer.lock
+
+# Ignorer fichiers générés par le système ou outils
+*.lock
+*.cache
+
+# Ignorer fichiers de déploiement et temporaires
+*.env.local
+.env.*
+
+# Ignorer fichiers spécifiques à l'OS Windows
+Thumbs.db
+ehthumbs.db
+
+# Ignorer dossiers de cache
+cache/
+tmp/
+temp/
+
+# Ignorer dossiers générés pour tests ou rapports
+coverage/
+
+# Ignorer les fichiers générés par les modules temporaires
+Modules/**/cache/
+Modules/**/logs/
+
+# Ignorer les fichiers de compilation si présents
+*.class
+*.o
+*.so
+*.exe
+
+# Ignorer les fichiers ou dossiers générés dans /public si nécessaire
+public/uploads/
+public/temp/
