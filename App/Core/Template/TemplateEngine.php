@@ -2,13 +2,13 @@
 
 /* ===== App/Core/Template/TemplateEngine.php ===== */
 
-namespace App\CoreTemplate;
+namespace App\Core\Template;
 
 class TemplateEngine
 {
     protected string $cachePath;
 
-    public function __construct(string $cachePath)
+    public function __construct(string $cachePath = '/default/cache/path')
     {
         $this->cachePath = $cachePath;
     }

@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+/* ===== /corlia ===== */
+
+declare(strict_types=1);
+
+use App\Console\Console;
+
+require __DIR__ . '/vendor/autoload.php';
+
+$console = new console();
+
+$console->run( $argv );

@@ -5,63 +5,63 @@
         <title>Bienvenue sur CoreliaPHP</title>
         <style>
             body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f4f9ff;
-            color: #1e3a5f;
-            margin: 0;
-            padding: 0;
+                font-family: 'Segoe UI', sans-serif;
+                background: #f4f9ff;
+                color: #1e3a5f;
+                margin: 0;
+                padding: 0;
             }
 
             header {
-            background-color: #3b82f6;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                background-color: #3b82f6;
+                color: white;
+                padding: 2rem;
+                text-align: center;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             }
 
             h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+                font-size: 2.2rem;
+                margin-bottom: 0.5rem;
             }
 
             main {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+                max-width: 1000px;
+                margin: 2rem auto;
+                padding: 2rem;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 2px 12px rgba(0,0,0,0.05);
             }
 
             section {
-            margin-bottom: 2rem;
+                margin-bottom: 2rem;
             }
 
             h2 {
-            color: #1d4ed8;
-            margin-bottom: 0.5rem;
+                color: #1d4ed8;
+                margin-bottom: 0.5rem;
             }
 
             code {
-            background: #eef6ff;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: monospace;
+                background: #eef6ff;
+                padding: 0.2rem 0.5rem;
+                border-radius: 4px;
+                font-family: monospace;
             }
 
             pre {
-            background: #f1f5f9;
-            padding: 1rem;
-            border-radius: 6px;
-            overflow: auto;
+                background: #f1f5f9;
+                padding: 1rem;
+                border-radius: 6px;
+                overflow: auto;
             }
 
             footer {
-            text-align: center;
-            margin: 2rem;
-            color: #64748b;
-            font-size: 0.9rem;
+                text-align: center;
+                margin: 2rem;
+                color: #64748b;
+                font-size: 0.9rem;
             }
 
             footer a {
@@ -103,18 +103,17 @@
             <h3>🧩 Exemple :</h3>
             <code>
                 &lt;?php<br />
-                namespace App\Controllers;<br />
-                <br />
+                namespace Src\Controllers;<br />
                 use App\Core\Http\Request;<br />
-                use App\Core\Routing\Route;<br />
-                <br />
-                class DefaultController<br />
+                use App\Core\Controller\BaseController;<br />
+                use App\Core\Routing\Route;<br /><br />
+                class $controllerName extends BaseController<br />
                 {<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;#[Route(path: "/")]<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;public function index(Request $request): string<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;{<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Bienvenue sur ma première route CoreliaPHP !";<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;#[Route(path: "/lien-vers-la-page")]<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;public function index( Request $request )<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return \$this->template->render("Page/Vue.ctpl", []);   <br /> 
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
                 }<br />
             </code>
             </section>

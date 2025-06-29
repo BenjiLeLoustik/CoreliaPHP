@@ -31,7 +31,7 @@ class Router
         $files = scandir($controllerPath);
         foreach ($files as $file) {
             if (str_ends_with($file, '.php')) {
-                $className = 'App\\Controllers\\' . pathinfo($file, PATHINFO_FILENAME);
+                $className = 'Src\\Controllers\\' . pathinfo($file, PATHINFO_FILENAME);
                 if (class_exists($className)) {
                     $this->registerRoutesFromController($className);
                 } else {

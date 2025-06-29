@@ -1,0 +1,44 @@
+<section class="welcome">
+    <h1>✅ Félicitations, votre page a bien été créée !</h1>
+    <p>
+        <strong>Contrôleur :</strong> TestController<br>
+        <strong>Vue :</strong> /Views/Test/index.ctpl
+    </p>
+</section>
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f4f9ff;
+        color: #1e3a5f;
+        margin: 0;
+        padding: 0;
+    }
+
+    .welcome {
+        max-width: 640px;
+        margin: 48px auto;
+        background: white;
+        border-radius: 16px;
+        padding: 40px 48px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #003a8c;
+    }
+
+    .welcome h1 {
+        font-weight: 900;
+        font-size: 2.3rem;
+        margin-bottom: 36px;
+        color: #002e75;
+        letter-spacing: -0.04em;
+    }
+
+    .welcome p {
+        font-size: 1.3rem;
+        line-height: 1.7;
+    }
+
+    .welcome strong {
+        color: #0056b3;
+    }
+</style>
