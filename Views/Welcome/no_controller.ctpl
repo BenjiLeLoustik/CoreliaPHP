@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Bienvenue - CoreliaPHP</title>
+</head>
+<body>
+    <h1>Bienvenue dans CoreliaPHP !</h1>
+    <p>Aucun contrôleur n'a été détecté.</p>
+    <p>Pour commencer, créez un contrôleur dans <code>/src/Controllers/</code> comme ceci :</p>
+    <pre>
+        <?php
+            namespace Src\Controllers;
+
+            use CoreliaPHP\Http\Request;
+            use CoreliaPHP\Http\Response;
+            use CoreliaPHP\Routing\Route;
+
+            class DefaultController
+            {
+                #[Route(path: "/")]
+                public function home(Request $request): Response
+                {
+                    return new Response("Hello world from CoreliaPHP!");
+                }
+            }
+        ?>
+    </pre>
+    <p>Puis relancez le serveur et allez sur <a href="/">http://localhost:8000/</a></p>
+</body>
+</html>
