@@ -1,31 +1,155 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>Bienvenue - CoreliaPHP</title>
-</head>
-<body>
-    <h1>Bienvenue dans CoreliaPHP !</h1>
-    <p>Aucun contrôleur n'a été détecté.</p>
-    <p>Pour commencer, créez un contrôleur dans <code>/src/Controllers/</code> comme ceci :</p>
-    <pre>
-        <?php
-            namespace Src\Controllers;
-
-            use App\Core\Http\Request;
-            use App\Core\Http\Response;
-            use App\Core\Routing\Route;
-
-            class DefaultController
-            {
-                #[Route(path: "/")]
-                public function home(Request $request): Response
-                {
-                    return new Response("Hello world from CoreliaPHP!");
-                }
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Bienvenue sur CoreliaPHP</title>
+        <style>
+            body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f9ff;
+            color: #1e3a5f;
+            margin: 0;
+            padding: 0;
             }
-        ?>
-    </pre>
-    <p>Puis relancez le serveur et allez sur <a href="/">http://localhost:8000/</a></p>
-</body>
+
+            header {
+            background-color: #3b82f6;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            }
+
+            h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            }
+
+            main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            }
+
+            section {
+            margin-bottom: 2rem;
+            }
+
+            h2 {
+            color: #1d4ed8;
+            margin-bottom: 0.5rem;
+            }
+
+            code {
+            background: #eef6ff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            }
+
+            pre {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow: auto;
+            }
+
+            footer {
+            text-align: center;
+            margin: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            }
+
+            footer a {
+                color: #007BFF;         /* Bleu vif */
+                text-decoration: none;  /* Pas de soulignement */
+                transition: color 0.3s ease;
+            }
+
+            footer a:hover,
+            footer a:focus {
+                color: #0056b3;         /* Bleu plus foncé au survol */
+                text-decoration: underline;
+                outline: none;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Bienvenue sur CoreliaPHP 🚀</h1>
+            <p>Un micro-framework moderne, clair et extensible.</p>
+        </header>
+
+        <main>
+
+            <section>
+            <h2>📘 Introduction</h2>
+            <p>CoreliaPHP est un framework PHP minimal conçu pour être <strong>modulaire</strong>, <strong>lisible</strong> et <strong>facile à étendre</strong>.</p>
+            <p>Ce message s'affiche car aucun contrôleur n'est encore défini dans <code>/src/Controllers</code>.</p>
+            </section>
+
+            <section>
+            <h2>🚀 Premiers pas</h2>
+            <ol>
+                <li>Créer un fichier <code>src/Controllers/DefaultController.php</code></li>
+                <li>Définir une méthode avec l’attribut PHP8 <code>#[Route(path: "/")]</code></li>
+                <li>Retourner une réponse HTML ou texte</li>
+            </ol>
+
+            <h3>🧩 Exemple :</h3>
+            <code>
+                &lt;?php<br />
+                namespace App\Controllers;<br />
+                <br />
+                use App\Core\Http\Request;<br />
+                use App\Core\Routing\Route;<br />
+                <br />
+                class DefaultController<br />
+                {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;#[Route(path: "/")]<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;public function index(Request $request): string<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Bienvenue sur ma première route CoreliaPHP !";<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                }<br />
+            </code>
+            </section>
+
+            <section>
+            <h2>⚙️ Fonctions disponibles</h2>
+            <ul>
+                <li><strong>Routing</strong> : via attributs PHP8 avec <code>#[Route(path: "/")]</code></li>
+                <li><strong>Service Container</strong> : injection automatique des dépendances</li>
+                <li><strong>HTTP Request / Response</strong> : objets typés pour manipuler les requêtes</li>
+                <li><strong>Fallback automatique</strong> : cette page s'affiche si aucun contrôleur n'est défini</li>
+            </ul>
+            </section>
+
+            <section>
+            <h2>📚 Documentation</h2>
+            <p>La documentation complète est en cours de rédaction. Un README complet est disponible à la racine.</p>
+            </section>
+
+            <section>
+            <h2>🔧 Prochaines fonctionnalités</h2>
+            <ul>
+                <li>Moteur de template <code>.ctpl</code></li>
+                <li>Modules & composants autonomes</li>
+                <li>Middleware (CSRF, Auth)</li>
+                <li>ORM avec entités & repositories</li>
+                <li>CLI Artisan Corelia</li>
+                <li>Aide IA intégrée pour les devs</li>
+            </ul>
+            </section>
+
+        </main>
+
+        <footer>
+            Développé avec ❤️ par <a href="https://github.com/BenjiLeLoustik/CoreliaPHP" target="_blank">Boezio Benjamin</a> – 2025
+        </footer>
+    </body>
 </html>
