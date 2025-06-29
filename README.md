@@ -27,21 +27,23 @@ Cette version initiale contient un **noyau simple mais fonctionnel**, prêt à �
 
 ### 5️⃣ Arborescence du projet
 
-
-CoreliaPHP/
-├── App/
-│   └── Core/                 → Noyau du framework
-│       ├── Container/        → Service container
-│       ├── Http/             → Request / Response
-│       └── Routing/          → Router + #[Route()]
-├── public/                   → Point d’entrée (index.php)
-├── src/
-│   └── Controllers/          → Vos contrôleurs
-├── views/                    → Vues .ctpl si moteur activé
-├── storage/                  → Cache, logs (à venir)
-├── .env                      → Configuration environnement
-├── composer.json             → Autoload PSR-4, dépendances
-└── README.txt                → Ce fichier
+```
+/App                  # Cœur du framework (Kernel, Container, HTTP, Routing)
+├── Core
+│   ├── Container     # Conteneur d'injection de dépendances (Service Container)
+│   ├── Http          # Gestion des requêtes HTTP (Request, Response)
+│   ├── Routing       # Routeur avec support des attributs PHP 8
+│   └── Services      # Services internes du framework
+/src                  # Code applicatif personnalisé
+├── Controllers       # Contrôleurs utilisateurs avec les routes définies
+└── Services          # Services métiers spécifiques à l'application
+/public               # Point d'entrée public accessible via le serveur web (index.php)
+/Storage              # Stockage des fichiers générés et temporaires
+├── cache             # Cache des templates, assets, autres données temporaires
+└── logs              # Fichiers de logs du framework
+.env                  # Fichier de configuration environnementale
+composer.json         # Gestionnaire de dépendances PHP (Composer)
+```
 
 ---
 ## 🧪 Tester le Framework
