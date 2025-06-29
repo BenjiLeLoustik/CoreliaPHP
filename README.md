@@ -81,16 +81,17 @@ class DefaultController
 ?>
 ---
 
-## 🛠️ Étapes suivantes possibles
+## 🛠️ Prochainement
 
-- 🧩 Ajouter moteur de template `.ctpl`
-- 📦 Ajouter des modules dans `/Modules`
-- 🛡️ Ajouter middleware (CSRF, Auth...)
-- 🗄️ ORM simple avec Entités et Repositories
-- 🖥️ Ajout d’une CLI pour automatiser les tâches
-- 🪵 Logger / Fichiers de log
-- ⚠️ Gestion des erreurs personnalisée
-- 🤖 Insertion d'une aide IA pour le développeur
+🧩 Ajouter moteur de template `.ctpl`  
+📦 Ajouter des modules dans `/Modules`  
+🛡️ Ajouter middleware (CSRF, Auth...)  
+🗄️ ORM simple avec Entités et Repositories  
+🖥️ Ajout d’une CLI pour automatiser les tâches  
+🪵 Logger / Fichiers de log  
+⚠️ Gestion des erreurs personnalisée  
+🤖 Insertion d'une aide IA pour le développeur  
+🌗 Ajout d'un switch light/dark pour l'interface
  
 ---
 
