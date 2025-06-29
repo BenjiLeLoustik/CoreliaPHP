@@ -23,7 +23,6 @@ class Router
 
     protected function loadRoutes(): void
     {
-        // Scan /src/Controllers pour trouver les classes
         $controllerPath = __DIR__ . '/../../../src/Controllers';
         if (!is_dir($controllerPath)) {
             return;
@@ -32,7 +31,7 @@ class Router
         $files = scandir($controllerPath);
         foreach ($files as $file) {
             if (str_ends_with($file, '.php')) {
-                $className = 'Src\\Controllers\\' . pathinfo($file, PATHINFO_FILENAME);
+                $className = 'App\\Controllers\\' . pathinfo($file, PATHINFO_FILENAME);
                 if (class_exists($className)) {
                     $this->registerRoutesFromController($className);
                 } else {
