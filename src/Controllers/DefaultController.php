@@ -4,9 +4,9 @@
 
 namespace Src\Controllers;
 
-use CoreliaPHP\Http\Request;
-use CoreliaPHP\Http\Response;
-use CoreliaPHP\Routing\Route;
+use App\Core\Http\Request;
+use App\Core\Http\Response;
+use App\Core\Routing\Route;
 
 class DefaultController
 {
