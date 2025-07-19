@@ -1,13 +1,163 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Welcome - CoreliaPHP</title>
     <meta charset="utf-8">
+    <title>Bienvenue sur CoreliaPHP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * { box-sizing: border-box; }
+        :root {
+            --brand: #0e9bff;
+            --bg: #f7fafd;
+            --card: #fff;
+            --accent: #15374a;
+            --cta: #0e9bff;
+            --muted: #607288;
+            --border: #e3e9f3;
+        }
+        body {
+            margin: 0; padding: 0;
+            background: var(--bg);
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            color: #18242f;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 880px;
+            margin: 8vh auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-emoji {
+            font-size: 3.1rem;
+            margin-bottom: .7rem;
+            user-select: none;
+        }
+        .hero-title {
+            font-size: 2.12rem;
+            font-weight: 900;
+            letter-spacing: .03em;
+            color: var(--brand);
+            text-align: center;
+        }
+        .hero-desc {
+            text-align: center;
+            font-size: 1.13rem;
+            color: var(--muted);
+            margin-bottom: 3.2rem;
+            margin-top: 0.7rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        .steps-horizontal {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: stretch;
+            margin: 0 auto 0 auto;
+            width: 100%;
+            max-width: 800px;
+            flex-wrap: wrap;
+        }
+        .step {
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 2px 16px #157aad07;
+            padding: 2.2rem 1.2rem 1.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 180px;
+            max-width: 245px;
+            flex: 1 1 170px;
+            border-top: 5px solid var(--brand);
+        }
+        .step-icon {
+            font-size: 2.1rem;
+            background: rgba(14,155,255,0.05);
+            border-radius: 50%;
+            margin-bottom: 1.1rem;
+            margin-top: .2rem;
+        }
+        .step-title {
+            font-size: 1.03rem;
+            font-weight: 700;
+            margin-bottom: .38rem;
+            color: var(--accent);
+            text-align: center;
+        }
+        .step-desc {
+            font-size: 1.01rem;
+            color: #48607c;
+            text-align: center;
+        }
+        .folder {
+            display: inline-block;
+            background: #eaf6ff;
+            color: var(--brand);
+            font-family: 'Fira Mono', 'Menlo', 'Consolas', monospace;
+            border-radius:5px;
+            padding: 1px 8px;
+            margin: 0 1.5px 0 1.5px;
+            font-size: .97em;
+        }
+        .version {
+            margin-top: 2.5rem;
+            color: #90adbc;
+            font-size: .94rem;
+            letter-spacing: 0.52px;
+            opacity: .87;
+            text-align:center;
+        }
+        @media (max-width: 960px) {
+            .steps-horizontal { flex-wrap: wrap; gap:1.2rem; }
+            .step { min-width: 180px; padding: 1.24rem 0.7rem 1.06rem 0.7rem;}
+            .container { max-width:95vw; }
+        }
+        @media (max-width: 650px) {
+            .container {margin-top:2rem;}
+            .steps-horizontal { flex-direction: column; gap:1.1rem;}
+            .step { max-width: none; min-width: 0;}
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenue sur CoreliaPHP</h1>
-    <p>Ceci est la page d'accueil par défaut.<br>
-       Pour démarrer, crée un workspace dans <code>/workspaces/</code> ou utilise <code>/app/</code> pour ton application principale.
-    </p>
+    <div class="container">
+        <div class="logo-emoji" aria-label="Logo fusée">🚀</div>
+        <div class="hero-title">Bienvenue sur CoreliaPHP</div>
+        <div class="hero-desc">
+            Framework PHP minimaliste, modulaire et moderne.<br>
+            Démarrez votre projet en suivant ces étapes simples :
+        </div>
+
+        <div class="steps-horizontal">
+            <div class="step">
+                <div class="step-icon">🧑‍💻</div>
+                <div class="step-title">Créer un contrôleur</div>
+                <div class="step-desc">
+                    Déposez vos premiers fichiers dans <span class="folder">app/Controllers/</span> pour définir vos routes.
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-icon">🎨</div>
+                <div class="step-title">Ajouter des vues</div>
+                <div class="step-desc">
+                    Placez vos templates dans <span class="folder">app/Views/</span> pour afficher vos pages avec Twig.
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-icon">🧩</div>
+                <div class="step-title">Activer des modules</div>
+                <div class="step-desc">
+                    Listez vos modules dans <span class="folder">modules.php</span> : <b>middlewares</b>, <b>debugbar</b>, etc.
+                </div>
+            </div>
+        </div>
+        <div class="version">
+            CoreliaPHP &bull; {{ corelia.version ?? 'dev' }}
+        </div>
+    </div>
 </body>
 </html>
