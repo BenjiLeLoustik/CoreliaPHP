@@ -18,53 +18,65 @@ $workspace = WorkspaceDetector::detect();
 Container::getInstance()->set( 'workspace', $workspace );
 
 /* Calcul des chemins dynamiquement selon le workspace actif */
-$wsRoot         = is_dir( __DIR__ . "/../workspaces/$workspace" ) ? __DIR__ . "/../workspaces/$workspace" : __DIR__ . '/../app';
-$wsControllers  = $wsRoot . "/Controllers";
-$wsViews        = $wsRoot . "/Views";
+$wsBase         = is_dir( __DIR__ . "/../workspaces/$workspace" ) ? __DIR__ . "/../workspaces/$workspace" : __DIR__ . '/../app';
+$wsControllers  = $wsBase . "/Controllers";
+$wsViews        = $wsBase . "/Views";
 
 /* Initialisation de TwigService */
 $twigService    = new TwigService( $wsViews );
 $twig           = $twigService->getTwig();
 Container::getInstance()->set( 'twig', $twig ); 
 
-/* Activation dynamique des modules (ex. Middlewares) */
-if( is_dir( __DIR__ . '/../modules/Middlewares' ) ){
-    define( 'CORELIA_SCOPE_ROOT', $wsRoot );
-    require __DIR__ . '/../modules/Middlewares/register.php';
+/* Chargement des modules "Autorisés/Activés" uniquement */
+
+/* 1. Modules globaux (racine) */
+$globalModules = [];
+if( file_exists( __DIR__ . '/../config/modules.php' ) ){
+    $globalModules = require __DIR__ . '/../config/modules.php';
 }
 
-/* Vérification de l'éxistance du contrôleur sinon affiche la page Welcome */
-$hasControllers = !empty( glob( $wsControllers . '/*.php' ) );
-$isDefault = ( $workspace === 'default' || $workspace === '' || $workspace === null );
+foreach( $globalModules as $modName ){
+    $reg = __DIR__ . '/../modules/' . $modName . '/register.php';
+    if( file_exists( $reg ) ){
+        require $reg;
+    }
+}
 
-/* Rendu Welcome si aucun contrôleur métier ou workspace actif */
+/* 2. Modules spécifiques workspace */
+$workspaceModules = [];
+if( file_exists( $wsBase . '/modules.php' ) ){
+    $workspaceModules . '/modules/' . $modName . '/register.php';
+    if( file_exists( $reg ) ) require $reg;
+}
+
+/* Affichage de la page Welcome si aucun contrôleur métier */
+$hasControllers = !empty( glob( $wsControllers . '/*.php' ) );
+$isDefault      = ( $workspace === 'default' || $workspace === '' || $workspace === null );
 if( !$hasControllers && $isDefault ){
     echo $twig->render( 'welcome.html.twig' );
     exit;
 }
 
-
-/* Execution pipeline : Middlewares (Si module activé) + Router */
-$corelia_middleware_loader = $_GLOBALS['corelia_middlewares'][ $wsRoot ] ?? null;
-
+/* Exécution du pipeline middlewares (si loader dispo) */
+$corelia_middleware_loader = $_GLOBALS['corelia_middlewares'][ $wsBase ] ?? null;
 if( $corelia_middleware_loader ){
-    $runner = $corelia_middleware_loader();
 
-    $rest = $runner->handle( $_REQUEST, function( $request ) use ( $wsControllers ) {
+    $runner = $corelia_middleware_loader();
+    $resp   = $runner->handle( $_REQUEST, function( $request ) use ( $wsControllers ) {
         $router = new Router( $wsControllers );
         ob_start();
-        $router->dispatch( $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'] );
-        $output = ob_get_clean();
-        
-        if( $output ){
-            return new \Corelia\Http\Response( $output );
-        }
-    });
 
-    if( $resp instanceof \Corelia\Http\Response ){
-        $resp->send();
+            $router->dispatch( $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'] );
+        
+        $output = ob_get_clean();
+
+        if( $output ) return new \Corelia\Http\Response( $output );
+    }); 
+
+    if( $resp instanceof \Corelia\Http\Response ) $resp->send();
+    else{
+        $router = new Router( $wsControllers );
+        $router->dispatch( $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'] );
     }
-}else{
-    $router = new Router( $wsControllers );
-    $router->dispatch( $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'] );
+
 }
