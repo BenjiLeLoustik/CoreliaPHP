@@ -1,0 +1,18 @@
+{# ===== ./app/Views/admin/modules.html.twig ===== #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"><title>Modules – Administration</title></head>
+<body>
+<h2>Gestion des modules</h2>
+<ul>
+    {% for mod in modules %}
+    <li>
+        {{ mod }} {% if mod in active_modules %}<b>✔️ activé</b>{% else %}❌ inactif{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<a href="/admin">Retour</a>
+</body>
+</html>
+

@@ -1,0 +1,11 @@
+{# ===== ./app/Views/admin/config.html.twig ===== #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"><title>Configuration – CoreliaPHP</title></head>
+<body>
+<h2>Configuration du framework</h2>
+<pre>{{ config|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+<a href="/admin">Retour</a>
+</body>
+</html>

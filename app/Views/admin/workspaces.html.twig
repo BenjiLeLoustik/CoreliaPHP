@@ -1,0 +1,15 @@
+{# ===== ./app/Views/admin/workspaces.html.twig ===== #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"><title>Workspaces – CoreliaPHP</title></head>
+<body>
+<h2>Liste des workspaces</h2>
+<ul>
+    {% for ws in workspaces %}
+    <li>{{ ws }}</li>
+    {% endfor %}
+</ul>
+<a href="/admin">Retour</a>
+</body>
+</html>
