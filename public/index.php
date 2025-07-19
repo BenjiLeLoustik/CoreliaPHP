@@ -30,22 +30,16 @@ Container::getInstance()->set( 'twig', $twig );
 /* Chargement des modules "Autorisés/Activés" uniquement */
 
 /* 1. Modules globaux (racine) */
-$globalModules = [];
-if( file_exists( __DIR__ . '/../config/modules.php' ) ){
-    $globalModules = require __DIR__ . '/../config/modules.php';
-}
-
+$globalModules = file_exists( __DIR__ . '/../config/modules.php' ) ? require __DIR__ . '/../config/modules.php' : [];
 foreach( $globalModules as $modName ){
     $reg = __DIR__ . '/../modules/' . $modName . '/register.php';
-    if( file_exists( $reg ) ){
-        require $reg;
-    }
+    if( file_exists( $reg ) ) require $reg;
 }
 
 /* 2. Modules spécifiques workspace */
-$workspaceModules = [];
-if( file_exists( $wsBase . '/modules.php' ) ){
-    $workspaceModules . '/modules/' . $modName . '/register.php';
+$workspaceModules = file_exists( $wsBase . '/modules.php' ) ? require $wsBase . '/modules.php' : [];
+foreach( $workspaceModules as $modName ){
+    $reg = $wsBase . '/modules/' . $modName . '/register.php';
     if( file_exists( $reg ) ) require $reg;
 }
 
@@ -57,26 +51,36 @@ if( !$hasControllers && $isDefault ){
     exit;
 }
 
-/* Exécution du pipeline middlewares (si loader dispo) */
-$corelia_middleware_loader = $_GLOBALS['corelia_middlewares'][ $wsBase ] ?? null;
-if( $corelia_middleware_loader ){
+/**
+ * ===== Pipeline Générique ===== 
+ */
+$request = $_REQUEST;
 
-    $runner = $corelia_middleware_loader();
-    $resp   = $runner->handle( $_REQUEST, function( $request ) use ( $wsControllers ) {
-        $router = new Router( $wsControllers );
-        ob_start();
+$bootPipeline = $GLOBALS['corelia_boot_pipeline'] ?? [];
 
-            $router->dispatch( $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'] );
-        
-        $output = ob_get_clean();
+$finalHandler = function( $req ) use ( $wsControllers ){
+    $router = new Router( $wsControllers );
+    ob_start();
 
-        if( $output ) return new \Corelia\Http\Response( $output );
-    }); 
-
-    if( $resp instanceof \Corelia\Http\Response ) $resp->send();
-    else{
-        $router = new Router( $wsControllers );
         $router->dispatch( $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'] );
-    }
 
+    $out = ob_get_clean();
+
+    if( $out ) return new \Corelia\Http\Response( $out );
+    return null;
+};
+
+/* Compose le pipeline */
+if( !empty( $bootPipeline ) ){
+    $handler = array_reduce(
+        array_reverse( $bootPipeline ),
+        fn( $next, $fn ) => fn( $req ) => $fn( $req, $next ), $finalHandler
+    );
+    $resp = $handler( $request );
+    if( $resp instanceof \Corelia\Http\Response ){
+        $resp->send();
+    }else{
+        $resp = $finalHandler( $request );
+        if( $resp instanceof \Corelia\Http\Response ) $resp->send();
+    }
 }
