@@ -9,7 +9,7 @@ return new class implements ModuleInterface
 
     public function requiredFolders(): array
     {
-        return ['middlewares'];
+        return ['Middlewares'];
     }
 
     public function boot( string $workspacePath ): void

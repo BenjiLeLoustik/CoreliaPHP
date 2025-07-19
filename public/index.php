@@ -40,7 +40,17 @@ foreach( $modulesToActivate as $moduleName ){
 
 /* Initialisation de TwigService */
 $twigService    = new TwigService( $wsViews );
-Container::getInstance()->set( 'twig', $twigService->getTwig() ); 
+$twig           = $twigService->getTwig();
+Container::getInstance()->set( 'twig', $twig ); 
+
+$noControllers  = empty( glob( $wsControllers . '/*.php' ) );
+$isDefault      = ( $workspace === 'default' || $workspace === '' || $workspace === null );
+
+/* Si aucun workspace réel, ni contrôleur métier trouvé, rendre la page Welcome */
+if( $isDefault && $noControllers ){
+    echo $twig->render( 'welcome.html.twig' );
+    exit;
+}
 
 $router = new Router( $wsControllers );
 $router->dispatch( $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'] );
